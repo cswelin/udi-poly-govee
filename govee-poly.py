@@ -5,6 +5,7 @@ import sys
 LOGGER = udi_interface.LOGGER
 
 from nodes import Controller
+from nodes import GoveeNode
 
 if __name__ == "__main__":
     try:
