@@ -64,9 +64,9 @@ class Controller(udi_interface.Node):
         self.TypedData = Custom(polyglot, 'customtypeddata')
 
 
-        LOGGER.info('init: Parameters={}'.format(Parameters))
-        LOGGER.info('init: TypedParameters={}'.format(TypedParameters))
-        LOGGER.info('init: TypedData={}'.format(TypedData))
+        LOGGER.info('init: Parameters={}'.format(self.Parameters))
+        LOGGER.info('init: TypedParameters={}'.format(self.TypedParameters))
+        LOGGER.info('init: TypedData={}'.format(self.TypedData))
         # Subscribe to various events from the Interface class.  This is
         # how you will get information from Polyglog.  See the API
         # documentation for the full list of events you can subscribe to.
