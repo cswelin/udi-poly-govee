@@ -308,14 +308,14 @@ class Controller(udi_interface.Node):
         )
 
     def remove_notice_test(self,command):
-        # LOGGER.info('remove_notice_test: notices={}'.format(self.Notices))
+        LOGGER.info('remove_notice_test: notices={}'.format(self.Notices))
         # # Remove the test notice
-        # self.Notices.delete('test')
+        self.Notices.delete('test')
 
     def remove_notices_all(self,command):
-        # LOGGER.info('remove_notices_all: notices={}'.format(self.Notices))
+        LOGGER.info('remove_notices_all: notices={}'.format(self.Notices))
         # # Remove all existing notices
-        # self.Notices.clear()
+        self.Notices.clear()
 
 
     def device_changed(device: GoveeDevice):
