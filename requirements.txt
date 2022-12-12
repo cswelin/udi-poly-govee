@@ -1,0 +1,3 @@
+udi_interface >= 3.0.8
+urllib3
+govee_led_wez

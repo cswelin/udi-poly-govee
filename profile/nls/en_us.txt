@@ -1,0 +1,21 @@
+
+# controller
+ND-controller-NAME = Goove NodeServer Controller
+CMD-ctl-QUERY-NAME = Query
+CMD-ctl-DISCOVER-NAME = Re-Discover
+CMD-ctl-UPDATE_PROFILE-NAME = Update Profile
+CMD-ctl-SET_DM-NAME = Set Logger Level
+ST-ctl-ST-NAME = NodeServer Online
+
+# Debug/Logger Modes
+CDM-9 = Debug + Modules
+CDM-10 = Debug
+CDM-20 = Info
+CDM-30 = Warning
+CDM-40 = Error
+CDM-50 = Critical
+
+# goovenode
+ND-goovenode-NAME = Goove Node
+ST-goovenode-ST-NAME = Node Status
+CMD-goovenode-PING-NAME = Ping

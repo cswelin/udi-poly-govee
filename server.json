@@ -1,0 +1,34 @@
+{
+	"name": "GooveController",
+	"docs": "https://github.com/cswelin/udi-poly-govee",
+	"type": "python3",
+	"executable": "govee-poly.py",
+	"install": "install.sh",
+	"description": "Goovee Node Server",
+	"notice": "",
+	"shortPoll": "120",
+	"longPoll": "240",
+	"testMode": true,
+	"logLevel": "DEBUG",
+	"devMode": true,
+	"profile_version": "3.0.0",
+	"credits": [
+		{
+			"title": "Goove: a NodeServer for Controlling Goove LED Strips",
+			"author": "Colin Swelin (Einstein.42)",
+			"version": "0.0.1",
+			"date": "Decemeber 12, 2022",
+			"source": "https://github.com/cswelin/udi-poly-govee",
+			"license": "https://github.com/cswelin/udi-poly-govee/LICENSE"
+		}
+	],
+	"store": {
+		"developer": "colinswelin@gamil.com",
+		"purchaseOptions": [
+			{
+				"isPerpetual": true,
+				"price": 0
+			}
+		]
+	}
+}
