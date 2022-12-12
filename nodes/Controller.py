@@ -81,7 +81,7 @@ class Controller(udi_interface.Node):
         self.poly.subscribe(self.poly.CUSTOMTYPEDDATA, self.typedDataHandler)
         self.poly.subscribe(self.poly.POLL, self.poll)
 
-        self.controller.set_device_change_callback(self.device_changed)
+        self.goveeController.set_device_change_callback(self.device_changed)
 
 
         # Tell the interface we have subscribed to all the events we need.
@@ -104,7 +104,7 @@ class Controller(udi_interface.Node):
         initiate communication with a device, do so here.
         """
 
-        self.controller.start_lan_poller()
+        self.goveeController.start_lan_poller()
         # Send the profile files to the ISY if neccessary. The profile version
         # number will be checked and compared. If it has changed since the last
         # start, the new files will be sent.
