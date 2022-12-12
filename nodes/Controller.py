@@ -220,7 +220,7 @@ class Controller(udi_interface.Node):
         example controller start method and from DISCOVER command recieved
         from ISY as an exmaple.
         """
-        self.poly.addNode(GooveNode(self.poly, self.address, 'templateaddr', 'Goove Name'))
+        self.poly.addNode(GoveeNode(self.poly, self.address, 'templateaddr', 'Goove Name'))
         LOGGER.debug('discover')
 
     def delete(self):

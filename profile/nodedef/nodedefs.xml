@@ -18,8 +18,8 @@
             </accepts>
         </cmds>
     </nodeDef>
-	<!-- goovenodeid -->
-    <nodeDef id="goovenodeid" nls="goovenode">
+	<!-- GoveeNode -->
+    <nodeDef id="goveenodeid" nls="goveenode">
         <editors />
         <sts>
             <st id="ST" editor="bool" />

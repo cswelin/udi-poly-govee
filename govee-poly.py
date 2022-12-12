@@ -8,7 +8,7 @@ from nodes import Controller
 
 if __name__ == "__main__":
     try:
-        polyglot = udi_interface.Interface([Controller, GooveNode])
+        polyglot = udi_interface.Interface([Controller, GoveeNode])
         polyglot.start()
         control = Controller(polyglot, 'controller', 'controller', 'Govee Controller')
         polyglot.runForever()

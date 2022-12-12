@@ -15,7 +15,7 @@ CDM-30 = Warning
 CDM-40 = Error
 CDM-50 = Critical
 
-# goovenode
-ND-goovenode-NAME = Goove Node
-ST-goovenode-ST-NAME = Node Status
-CMD-goovenode-PING-NAME = Ping
+# GoveeNode
+ND-goveenode-NAME = Goove Node
+ST-goveenode-ST-NAME = Node Status
+CMD-goveenode-PING-NAME = Ping

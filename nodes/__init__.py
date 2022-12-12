@@ -1,5 +1,5 @@
 
 """ Node classes used by the Python template Node Server. """
 
-from .GooveNode       import GooveNode
+from .GoveeNode       import GoveeNode
 from .Controller      import Controller
