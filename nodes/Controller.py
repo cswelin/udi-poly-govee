@@ -129,8 +129,8 @@ class Controller(udi_interface.Node):
         devices = await self.goveeController.query_http_devices()
 
         for device in devices:
-            name = self.get_valid_characters(device.device_name)
-            address = self.get_valid_characters('G{}'.format(device.device_id.lower()))[:14]
+            name = self.get_valid_characters(device.device_name)[:10]
+            address = self.get_valid_characters('G{}'.format(device.device_id.lower()))[:10]
             self.poly.addNode(GoveeNode(self.poly, self.address, address, name, device))
         
         LOGGER.debug(devices)
