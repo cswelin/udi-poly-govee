@@ -195,7 +195,7 @@ class Controller(udi_interface.Node):
 
                 if self.started == False:
                     self.started = True
-                    asyncio.run(self.startGovee)
+                    asyncio.run(self.startGovee())
 
         
                 
@@ -241,7 +241,7 @@ class Controller(udi_interface.Node):
 
     def discover(self, *args, **kwargs):
         if self.started == True:
-            asyncio.run(self.startGovee)
+            asyncio.run(self.goveeDiscover())
 
         """
         Example
