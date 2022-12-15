@@ -357,7 +357,7 @@ class Controller(udi_interface.Node):
         #  https://stackoverflow.com/questions/26541968/delete-every-non-utf-8-symbols-froms-string
         name = bytes(name, 'utf-8').decode('utf-8','ignore')
         # Remove <>`~!@#$%^&*(){}[]?/\;:"'` characters from name
-        return re.sub(r"[<>`~!@#$%^&*(){}[\]?/\\;:\"']+", "", name)
+        return re.sub(r"[_<>`~!@#$%^&*(){}[\]?/\\;:\"']+", "", name)
 
     """
 
