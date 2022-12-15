@@ -135,6 +135,7 @@ class Controller(udi_interface.Node):
             LOGGER.debug('goveeDiscover: Name={} Address={}'.format(name, address))
             self.poly.addNode(GoveeNode(self.poly, self.address, address, name, device))
         
+        self.poly.addNode(GoveeNode(self.poly, self.address, "gnodeId", "Govee Node", devices[0]))
         LOGGER.debug(devices)
 
 
