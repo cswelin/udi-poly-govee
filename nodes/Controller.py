@@ -191,7 +191,7 @@ class Controller(udi_interface.Node):
         if settings is not None:
             api_key = settings['api_key']
             if api_key is not None:
-                self.goveeController.set_http_api_key("1e42e1e9-640f-4f66-80f6-0fe579ecf42b")
+                self.goveeController.set_http_api_key(api_key)
 
                 if self.started == False:
                     self.started = True
