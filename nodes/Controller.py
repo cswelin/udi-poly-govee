@@ -125,7 +125,7 @@ class Controller(udi_interface.Node):
 
 
     async def goveeDiscover(self) -> asyncio.coroutine:
-        devices = await goveeController.query_http_devices()
+        devices = await self.goveeController.query_http_devices()
 
         for device in devices:
             self.poly.addNode(GoveeNode(self.poly, self.address, device.device_id, device.device_name, device))
@@ -134,8 +134,8 @@ class Controller(udi_interface.Node):
 
 
     async def startGovee(self, params) -> asyncio.coroutine:
-        goveeController.start_http_poller()
-        goveeController.start_lan_poller()
+        self.goveeController.start_http_poller()
+        self.goveeController.start_lan_poller()
 
     """
     Called via the CUSTOMPARAMS event. When the user enters or
@@ -191,7 +191,7 @@ class Controller(udi_interface.Node):
         if settings is not None:
             api_key = settings['api_key']
             if api_key is not None:
-                controller.set_http_api_key("1e42e1e9-640f-4f66-80f6-0fe579ecf42b")
+                self.goveeController.set_http_api_key("1e42e1e9-640f-4f66-80f6-0fe579ecf42b")
 
                 if self.started == False:
                     self.started = True
