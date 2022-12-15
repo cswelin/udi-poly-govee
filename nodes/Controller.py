@@ -6,6 +6,7 @@ a different Python module which doesn't have the new LOG_HANDLER functionality
 """
 import udi_interface
 import asyncio
+import re
 from govee_led_wez import GoveeController, GoveeDevice
 
 
