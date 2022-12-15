@@ -130,15 +130,15 @@ class Controller(udi_interface.Node):
 
         for device in devices:
             name = self.get_valid_characters(device.device_name)
-            address = self.get_valid_characters('G{}'.format(device.device_id.lower()))[:13]
+            address = self.get_valid_characters('G{}'.format(device.device_id.lower()))[:14]
             self.poly.addNode(GoveeNode(self.poly, self.address, address, name, device))
         
         LOGGER.debug(devices)
 
 
     async def startGovee(self) -> asyncio.coroutine:
-        self.goveeController.start_http_poller()
-        self.goveeController.start_lan_poller()
+        await self.goveeController.start_http_poller()
+        await self.goveeController.start_lan_poller()
 
     """
     
