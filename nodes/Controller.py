@@ -130,7 +130,7 @@ class Controller(udi_interface.Node):
 
         for device in devices:
             device_name = self.get_valid_characters(device.device_name)
-            address = self.get_valid_characters('G{}'.format(device.device_id.lower()))[:14]
+            address = self.get_valid_characters('G{}'.format(device.device_id).lower())[:14]
 
             LOGGER.debug('goveeDiscover: Name={} Address={}'.format(device_name, address))
             self.poly.addNode(GoveeNode(self.poly, self.address, address, device_name, device))
