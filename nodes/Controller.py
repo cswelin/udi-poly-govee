@@ -5,6 +5,7 @@ Get the polyinterface objects we need.
 a different Python module which doesn't have the new LOG_HANDLER functionality
 """
 import udi_interface
+import asyncio
 from govee_led_wez import GoveeController, GoveeDevice
 
 
@@ -104,7 +105,6 @@ class Controller(udi_interface.Node):
         initiate communication with a device, do so here.
         """
 
-        self.goveeController.start_lan_poller()
         # Send the profile files to the ISY if neccessary. The profile version
         # number will be checked and compared. If it has changed since the last
         # start, the new files will be sent.
@@ -125,6 +125,11 @@ class Controller(udi_interface.Node):
         self.discover()
 
         
+    async def startGovee(self, params) -> asyncio.coroutine:
+        devices = await controller.query_http_devices()
+        LOGGER.debug(devices)
+        controller.start_http_poller()
+        controller.start_lan_poller()
 
     """
     Called via the CUSTOMPARAMS event. When the user enters or
@@ -174,6 +179,19 @@ class Controller(udi_interface.Node):
         self.TypedData.load(params)
         LOGGER.debug('Loading typed data now')
         LOGGER.debug(params)
+
+        if params is not None:
+            api_key = params['api_key']
+            if api_key is not None:
+                controller.set_http_api_key("1e42e1e9-640f-4f66-80f6-0fe579ecf42b")
+
+                if self.started == False:
+                    self.started = True
+                    asyncio.run(self.startGovee(params))
+
+        
+                
+        
 
     """
     Called via the LOGLEVEL event.
@@ -265,8 +283,6 @@ class Controller(udi_interface.Node):
     def check_params(self):
         self.Notices.clear()
 
-        # self.api_key = self.Parameters.api_key
-        # if self.api_key is None:
         #     self.api_key = default_api_key
         #     LOGGER.error('check_params: api_key not defined in customParams, please add it.  Using {}'.format(default_password))
 
