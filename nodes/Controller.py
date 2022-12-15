@@ -106,6 +106,8 @@ class Controller(udi_interface.Node):
         initiate communication with a device, do so here.
         """
 
+        self.loop.run_forever()
+
         # Send the profile files to the ISY if neccessary. The profile version
         # number will be checked and compared. If it has changed since the last
         # start, the new files will be sent.
@@ -125,7 +127,6 @@ class Controller(udi_interface.Node):
         # represent the found device(s)
         self.discover()
 
-        self.loop.run_forever()
 
     async def goveeDiscover(self) -> asyncio.coroutine:
         devices = await self.goveeController.query_http_devices()
