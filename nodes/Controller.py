@@ -56,6 +56,7 @@ class Controller(udi_interface.Node):
         self.goveeController = GoveeController()
         self.api_key = None 
         self.started = False
+        self.loop = asyncio.new_event_loop()
 
         # Create data storage classes to hold specific data that we need
         # to interact with.  
@@ -124,16 +125,17 @@ class Controller(udi_interface.Node):
         # represent the found device(s)
         self.discover()
 
+        self.loop.run_forever()
 
     async def goveeDiscover(self) -> asyncio.coroutine:
         devices = await self.goveeController.query_http_devices()
 
         for device in devices:
-            name = self.get_valid_characters(device.device_name)
+            device_name = self.get_valid_characters(device.device_name)
             address = self.get_valid_characters('G{}'.format(device.device_id.lower()))[:14]
 
-            LOGGER.debug('goveeDiscover: Name={} Address={}'.format(name, address))
-            self.poly.addNode(GoveeNode(self.poly, self.address, address, name, device))
+            LOGGER.debug('goveeDiscover: Name={} Address={}'.format(device_name, address))
+            self.poly.addNode(GoveeNode(self.poly, self.address, address, device_name, device))
         
         self.poly.addNode(GoveeNode(self.poly, self.address, "gnodeId", "Govee Node", devices[0]))
         LOGGER.debug(devices)
@@ -203,7 +205,7 @@ class Controller(udi_interface.Node):
 
                 if self.started == False:
                     self.started = True
-                    asyncio.run(self.startGovee())
+                    loop.run(self.startGovee())
 
         
                 
@@ -249,7 +251,7 @@ class Controller(udi_interface.Node):
 
     def discover(self, *args, **kwargs):
         if self.started == True:
-            asyncio.run(self.goveeDiscover())
+            loop.run(self.goveeDiscover())
 
         """
         Example
@@ -275,6 +277,8 @@ class Controller(udi_interface.Node):
         the opportunity here to cleanly disconnect from your device or do
         other shutdown type tasks.
         """
+
+        self.loop.stop()
         LOGGER.debug('NodeServer stopped.')
 
 
