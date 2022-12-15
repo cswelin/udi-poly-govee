@@ -10,7 +10,7 @@ from govee_led_wez import GoveeController, GoveeDevice
 
 
 # My Template Node
-# from nodes import TemplateNode
+from nodes import GoveeNode
 
 """
 Some shortcuts for udi interface components
@@ -128,8 +128,8 @@ class Controller(udi_interface.Node):
     async def startGovee(self, params) -> asyncio.coroutine:
         devices = await controller.query_http_devices()
         LOGGER.debug(devices)
-        controller.start_http_poller()
-        controller.start_lan_poller()
+        await controller.start_http_poller()
+        await controller.start_lan_poller()
 
     """
     Called via the CUSTOMPARAMS event. When the user enters or
