@@ -54,8 +54,7 @@ class Controller(udi_interface.Node):
         self.hb = 0
         self.goveeController = GoveeController()
         self.api_key = None 
-        self.lan_control = False
-
+        self.started = False
 
         # Create data storage classes to hold specific data that we need
         # to interact with.  
