@@ -56,7 +56,6 @@ class Controller(udi_interface.Node):
         self.goveeController = GoveeController()
         self.api_key = None 
         self.started = False
-        self.loop = asyncio.new_event_loop()
 
         # Create data storage classes to hold specific data that we need
         # to interact with.  
@@ -106,8 +105,6 @@ class Controller(udi_interface.Node):
         initiate communication with a device, do so here.
         """
 
-        self.loop.run_forever()
-
         # Send the profile files to the ISY if neccessary. The profile version
         # number will be checked and compared. If it has changed since the last
         # start, the new files will be sent.
@@ -144,7 +141,7 @@ class Controller(udi_interface.Node):
 
     async def startGovee(self) -> asyncio.coroutine:
         self.goveeController.start_http_poller()
-        self.goveeController.start_lan_poller()
+        # self.goveeController.start_lan_poller()
 
     """
     {'id': 'c7c690b7-146f-4d50-8746-fc6ec35179c8', 'uuid': '00:0d:b9:52:d5:0c', 'profileNum': 2, 'address': 'Ge55e7ca6b09d0', 'name': 'undefined', 'nodeDefId': 'goveenodeid', 'nls': None, 'hint': '0x00000000', 'controller': 0, 'primaryNode': 'controller', 'private': None, 'isPrimary': 0, 'enabled': 1, 'timeAdded': 1671119307761, 'timeModified': 1671120413542, 'dbVersion': 1}
@@ -206,7 +203,7 @@ class Controller(udi_interface.Node):
 
                 if self.started == False:
                     self.started = True
-                    loop.run(self.startGovee())
+                    asyncio.run(self.startGovee())
 
         
                 
@@ -252,7 +249,7 @@ class Controller(udi_interface.Node):
 
     def discover(self, *args, **kwargs):
         if self.started == True:
-            loop.run(self.goveeDiscover())
+            asyncio.run(self.goveeDiscover())
 
         """
         Example
@@ -278,8 +275,6 @@ class Controller(udi_interface.Node):
         the opportunity here to cleanly disconnect from your device or do
         other shutdown type tasks.
         """
-
-        self.loop.stop()
         LOGGER.debug('NodeServer stopped.')
 
 
