@@ -345,7 +345,7 @@ class Controller(udi_interface.Node):
         self.Notices.clear()
 
 
-    def device_changed(device: GoveeDevice):
+    def device_changed(self, device: GoveeDevice):
         LOGGER.info('device_changed: device={}'.format(device))
 
     """
