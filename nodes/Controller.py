@@ -186,8 +186,10 @@ class Controller(udi_interface.Node):
         LOGGER.debug('Loading typed data now')
         LOGGER.debug(params)
 
-        if params is not None:
-            api_key = params['api_key']
+        settings = params['settings']
+
+        if settings is not None:
+            api_key = settings['api_key']
             if api_key is not None:
                 controller.set_http_api_key("1e42e1e9-640f-4f66-80f6-0fe579ecf42b")
 
