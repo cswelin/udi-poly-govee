@@ -135,13 +135,12 @@ class Controller(udi_interface.Node):
             LOGGER.debug('goveeDiscover: Name={} Address={}'.format(device_name, address))
             self.poly.addNode(GoveeNode(self.poly, self.address, address, device_name, device))
         
-        self.poly.addNode(GoveeNode(self.poly, self.address, "gnodeId", "Govee Node", devices[0]))
         LOGGER.debug(devices)
 
 
     async def startGovee(self) -> asyncio.coroutine:
         self.goveeController.start_http_poller()
-        # self.goveeController.start_lan_poller()
+        self.goveeController.start_lan_poller()
 
     """
     {'id': 'c7c690b7-146f-4d50-8746-fc6ec35179c8', 'uuid': '00:0d:b9:52:d5:0c', 'profileNum': 2, 'address': 'Ge55e7ca6b09d0', 'name': 'undefined', 'nodeDefId': 'goveenodeid', 'nls': None, 'hint': '0x00000000', 'controller': 0, 'primaryNode': 'controller', 'private': None, 'isPrimary': 0, 'enabled': 1, 'timeAdded': 1671119307761, 'timeModified': 1671120413542, 'dbVersion': 1}
