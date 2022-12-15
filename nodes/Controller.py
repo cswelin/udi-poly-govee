@@ -139,7 +139,7 @@ class Controller(udi_interface.Node):
 
 
     async def startGovee(self) -> asyncio.coroutine:
-        await self.goveeController.start_http_poller()
+        self.goveeController.start_http_poller()
         await self.goveeController.start_lan_poller()
 
     """
