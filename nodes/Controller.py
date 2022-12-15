@@ -131,6 +131,8 @@ class Controller(udi_interface.Node):
         for device in devices:
             name = self.get_valid_characters(device.device_name)
             address = self.get_valid_characters('G{}'.format(device.device_id.lower()))[:14]
+
+            LOGGER.debug('goveeDiscover: Name={} Address={}'.format(name, address))
             self.poly.addNode(GoveeNode(self.poly, self.address, address, name, device))
         
         LOGGER.debug(devices)
@@ -141,7 +143,8 @@ class Controller(udi_interface.Node):
         await self.goveeController.start_lan_poller()
 
     """
-    
+    {'id': 'c7c690b7-146f-4d50-8746-fc6ec35179c8', 'uuid': '00:0d:b9:52:d5:0c', 'profileNum': 2, 'address': 'Ge55e7ca6b09d0', 'name': 'undefined', 'nodeDefId': 'goveenodeid', 'nls': None, 'hint': '0x00000000', 'controller': 0, 'primaryNode': 'controller', 'private': None, 'isPrimary': 0, 'enabled': 1, 'timeAdded': 1671119307761, 'timeModified': 1671120413542, 'dbVersion': 1}
+
     Called via the CUSTOMPARAMS event. When the user enters or
     updates Custom Parameters via the dashboard. The full list of
     parameters will be sent to your node server via this event.
