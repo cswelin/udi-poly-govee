@@ -195,7 +195,7 @@ class Controller(udi_interface.Node):
 
                 if self.started == False:
                     self.started = True
-                    asyncio.run(self.startGovee(params))
+                    asyncio.run(self.startGovee)
 
         
                 
