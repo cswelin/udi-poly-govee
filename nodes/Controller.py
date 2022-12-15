@@ -133,7 +133,7 @@ class Controller(udi_interface.Node):
         LOGGER.debug(devices)
 
 
-    async def startGovee(self, params) -> asyncio.coroutine:
+    async def startGovee(self) -> asyncio.coroutine:
         self.goveeController.start_http_poller()
         self.goveeController.start_lan_poller()
 
