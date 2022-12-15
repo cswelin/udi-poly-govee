@@ -128,7 +128,9 @@ class Controller(udi_interface.Node):
         devices = await self.goveeController.query_http_devices()
 
         for device in devices:
-            self.poly.addNode(GoveeNode(self.poly, self.address, device.device_id, device.device_name, device))
+            name = self.get_valid_characters(device.name)
+            address = self.get_valid_characters('G-{}'.format(device.address.lower()))[:14]
+            self.poly.addNode(GoveeNode(self.poly, address, device.device_id, name, device))
         
         LOGGER.debug(devices)
 
@@ -348,7 +350,18 @@ class Controller(udi_interface.Node):
     def device_changed(self, device: GoveeDevice):
         LOGGER.info('device_changed: device={}'.format(device))
 
+    def get_valid_characters(self, name):
+        # Only allow utf-8 characters
+        #  https://stackoverflow.com/questions/26541968/delete-every-non-utf-8-symbols-froms-string
+        name = bytes(name, 'utf-8').decode('utf-8','ignore')
+        # Remove <>`~!@#$%^&*(){}[]?/\;:"'` characters from name
+        return re.sub(r"[<>`~!@#$%^&*(){}[\]?/\\;:\"']+", "", name)
+
     """
+
+    {'addnode': [{'address': 'E5:5E:7C:A6:B0:9D:08:5C', 'name': 'H615B_085C', 'nodeDefId': 'goveenodeid', 'primaryNode': 'controller', 'drivers': [{'driver': 'ST', 'value': 0, 'uom': 2}], 'hint': [0, 0, 0, 0], 'private': None}]}
+
+
     Optional.
     Since the controller is a node in ISY, it will actual show up as a node.
     Thus it needs to know the drivers and what id it will use. The controller
