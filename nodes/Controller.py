@@ -124,12 +124,19 @@ class Controller(udi_interface.Node):
         # represent the found device(s)
         self.discover()
 
+
+    async def goveeDiscover(self) -> asyncio.coroutine:
+        devices = await goveeController.query_http_devices()
+
+        for device in devices:
+            self.poly.addNode(GoveeNode(self.poly, self.address, device.device_id, device.device_name, device))
         
-    async def startGovee(self, params) -> asyncio.coroutine:
-        devices = await controller.query_http_devices()
         LOGGER.debug(devices)
-        await controller.start_http_poller()
-        await controller.start_lan_poller()
+
+
+    async def startGovee(self, params) -> asyncio.coroutine:
+        goveeController.start_http_poller()
+        goveeController.start_lan_poller()
 
     """
     Called via the CUSTOMPARAMS event. When the user enters or
@@ -232,13 +239,16 @@ class Controller(udi_interface.Node):
             nodes[node].reportDrivers()
 
     def discover(self, *args, **kwargs):
+        if self.started == True:
+            asyncio.run(self.startGovee)
+
         """
         Example
         Do discovery here. Does not have to be called discovery. Called from
         example controller start method and from DISCOVER command recieved
         from ISY as an exmaple.
         """
-        self.poly.addNode(GoveeNode(self.poly, self.address, 'templateaddr', 'Goove Name'))
+        # self.poly.addNode(GoveeNode(self.poly, self.address, 'templateaddr', 'Goove Name'))
         LOGGER.debug('discover')
 
     def delete(self):

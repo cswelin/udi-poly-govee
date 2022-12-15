@@ -28,7 +28,7 @@ class GoveeNode(udi_interface.Node):
     query(): Called when ISY sends a query request to Polyglot for this
         specific node
     """
-    def __init__(self, polyglot, primary, address, name):
+    def __init__(self, polyglot, primary, address, name, goveeDevice):
         """
         Optional.
         Super runs all the parent class necessities. You do NOT have
@@ -42,7 +42,7 @@ class GoveeNode(udi_interface.Node):
         super(GoveeNode, self).__init__(polyglot, primary, address, name)
         self.poly = polyglot
         self.lpfx = '%s:%s' % (address,name)
-
+        self.goveeDevice = goveeDevice
         self.poly.subscribe(self.poly.START, self.start, address)
         self.poly.subscribe(self.poly.POLL, self.poll)
 
